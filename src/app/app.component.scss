@@ -1,0 +1,19 @@
+:host {
+
+  & > .list {
+    display: grid;
+    grid-gap: 8px;
+    list-style-type: square;
+  }
+
+  & > .list > .item {
+    font-size: 22px;
+    padding: 8px;
+  }
+
+  & > .list > .item.-done {
+    color: #ccc;
+    border-color: #ccc;
+    text-decoration: line-through;
+  }
+}
