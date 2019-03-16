@@ -1,7 +1,23 @@
-<p *ngIf="loading$ | async">Loading...</p>
+<ng-container *ngIf="loading$ | async; then loading else content"></ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>
 
-<ul *ngIf="!(loading$ | async)">
-  <li *ngFor="let todo of todos$ | async">
-    {{ todo.title }}
-  </li>
-</ul>
+<ng-template #content>
+  <h2>My Todos</h2>
+  <ul class="list">
+    <li *ngFor="let todo of todos$ | async" class="item"
+      [class.-done]="todo.done">
+      <div class="info">
+        <span class="title">{{ todo.title }}</span>
+        <span class="date">{{ todo.finishDate | date:'fullDate' }}</span>
+      </div>
+      <div class="actions">
+        <button
+          *ngIf="!todo.done"
+          class="btn"
+          (click)="setTodoAsDone(todo.id)">Done</button>
+      </div>
+    </li>
+  </ul>
+</ng-template>

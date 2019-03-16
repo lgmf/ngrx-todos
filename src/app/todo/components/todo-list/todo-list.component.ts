@@ -7,7 +7,7 @@ import { TodoState } from '../../store/todo.state';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.sass'],
+  styleUrls: ['./todo-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent {
@@ -17,6 +17,10 @@ export class TodoListComponent {
 
   constructor(private store: Store<{ todo: TodoState }>) {
     this.store.dispatch(new TodoActions.LoadTodos());
+  }
+
+  setTodoAsDone(id: number) {
+    this.store.dispatch(new TodoActions.FinishTodo(id));
   }
 
 }

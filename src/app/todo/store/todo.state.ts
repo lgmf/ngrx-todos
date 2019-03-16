@@ -32,6 +32,19 @@ export function TodoReducer(state = initialState, action: TodoActions.Actions) {
       };
     }
 
+    case TodoActions.FINISH_TODO_SUCCESS: {
+      const { payload } = action as TodoActions.FinishTodoSuccess;
+      const updated = payload;
+
+      return {
+        ...state,
+        todos: {
+          ...state.todos,
+          [updated.id]: updated
+        }
+      };
+    }
+
     case TodoActions.LOAD_TODOS_FAIL: {
       return {
         ...state,

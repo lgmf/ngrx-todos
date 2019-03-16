@@ -1,0 +1,48 @@
+:host {
+  display: grid;
+  grid-gap: 16px;
+
+  & > .list {
+    display: grid;
+    grid-gap: 16px;
+  }
+
+  & > .list > .item {
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 8px;
+    padding: 8px;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  & > .list > .item.-done {
+    color: #c3bfbf;
+    text-decoration: line-through;
+  }
+
+  & > .list > .item > .info {
+    display: grid;
+    grid-gap: 8px;
+
+    & > .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-right: 16px;
+    }
+
+    & > .date {
+      color: #c3bfbf;
+      font-size: 14px;
+      font-weight: bold
+    }
+  }
+
+  & > .list > .item > .actions {
+    & > .btn {
+      background: black;
+      color: white;
+      padding: 8px;
+    }
+  }
+}
+

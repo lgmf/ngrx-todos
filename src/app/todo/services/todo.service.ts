@@ -7,10 +7,15 @@ import { Todo } from '../models/todo.model';
   providedIn: 'root'
 })
 export class TodoService {
+  readonly baseUrl = `${environment.apiUrl}/todos`;
+
   constructor(private http: HttpClient) { }
 
   list() {
-    const path = `${environment.apiUrl}/todos`;
-    return this.http.get<Todo[]>(path);
+    return this.http.get<Todo[]>(this.baseUrl);
+  }
+
+  patch(id: number, todo: Partial<Todo>) {
+    return this.http.patch<Todo>(`${this.baseUrl}/${id}`, todo);
   }
 }

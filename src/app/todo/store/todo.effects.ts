@@ -18,6 +18,16 @@ export class TodoEffects {
     )
   );
 
+  @Effect()
+  patchTodo$ = this.actions$.pipe(
+    ofType(TodoActions.FINISH_TODO),
+    switchMap((action: TodoActions.FinishTodo) =>
+      this.todoService.patch(action.payload, { done: true }).pipe(
+        map(updated => new TodoActions.FinishTodoSuccess(updated))
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private todoService: TodoService

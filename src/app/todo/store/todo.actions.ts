@@ -6,6 +6,9 @@ export namespace TodoActions {
   export const LOAD_TODOS_SUCCESS = '[Todo] Load Todos Success';
   export const LOAD_TODOS_FAIL = '[Todo] Load Todos Fail';
 
+  export const FINISH_TODO = '[Todo] Finish Todo';
+  export const FINISH_TODO_SUCCESS = '[Todo] Finish Todo Success';
+
   export const ADD_TODO = '[App] Add Todo';
 
   export class LoadTodos {
@@ -22,10 +25,27 @@ export namespace TodoActions {
     constructor(public payload: string) { }
   }
 
-  export class AddTodo implements Action {
-    type = ADD_TODO;
+  export class FinishTodo {
+    type = FINISH_TODO;
+
+    constructor(public payload: number) { }
+  }
+
+  export class FinishTodoSuccess {
+    type = FINISH_TODO_SUCCESS;
+
     constructor(public payload: Todo) { }
   }
 
-  export type Actions = AddTodo | LoadTodos | LoadTodosSuccess | LoadTodosFail;
+  // export class AddTodo implements Action {
+  //   type = ADD_TODO;
+  //   constructor(public payload: Todo) { }
+  // }
+
+  export type Actions =
+    | LoadTodos
+    | LoadTodosSuccess
+    | LoadTodosFail
+    | FinishTodo
+    | FinishTodoSuccess;
 }

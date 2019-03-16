@@ -2,7 +2,7 @@ export interface Todo {
   id: number;
   title: string;
   done: boolean;
-  finishData: string;
+  finishDate: string;
   label: number;
   description: string;
 }
