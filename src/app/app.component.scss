@@ -1,3 +1,6 @@
+$primary: #3f51b5;
+$primary-contrast: #fff;
+
 :host {
   display: grid;
   grid-gap: 16px;
@@ -5,8 +8,8 @@
   & > .header {
     display: flex;
     justify-content: space-between;
-    background: black;
-    color: white;
+    background: $primary;
+    color: $primary-contrast;
     padding: 16px;
   }
 

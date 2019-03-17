@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Clean the house",
       "done": true,
-      "finishDate": "2019-03-18T19:04:27.856Z",
+      "finishDate": "2019-03-18",
       "label": 1,
       "description": "Morbi turpis ante, auctor vel nunc ut, faucibus dignissim nulla. Nunc velit neque, fringilla at rutrum ac, elementum at dolor. Nullam vel velit tortor. Sed molestie posuere massa, a cursus arcu porttitor ac. Ut sed odio eu odio dignissim fermentum. Aenean at aliquam felis. Morbi convallis rutrum maximus."
     },
@@ -12,9 +12,15 @@
       "id": 2,
       "title": "Study ngrx router store",
       "done": false,
-      "finishDate": "2019-03-15T19:04:27.856Z",
+      "finishDate": "2019-03-15",
       "label": 2,
       "description": "Morbi turpis ante, auctor vel nunc ut, faucibus dignissim nulla. Nunc velit neque, fringilla at rutrum ac, elementum at dolor. Nullam vel velit tortor. Sed molestie posuere massa, a cursus arcu porttitor ac. Ut sed odio eu odio dignissim fermentum. Aenean at aliquam felis. Morbi convallis rutrum maximus."
+    },
+    {
+      "id": 5,
+      "title": "Bake a cake",
+      "finishDate": "2019-03-19T03:00:00.000Z",
+      "done": true
     }
   ],
   "labels": [

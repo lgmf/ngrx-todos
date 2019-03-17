@@ -15,6 +15,10 @@ export class TodoService {
     return this.http.get<Todo[]>(this.baseUrl);
   }
 
+  save(todo: Todo) {
+    return this.http.post<Todo>(this.baseUrl, todo);
+  }
+
   patch(id: number, todo: Partial<Todo>) {
     return this.http.patch<Todo>(`${this.baseUrl}/${id}`, todo);
   }

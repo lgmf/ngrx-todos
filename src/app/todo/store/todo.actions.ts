@@ -9,7 +9,8 @@ export namespace TodoActions {
   export const FINISH_TODO = '[Todo] Finish Todo';
   export const FINISH_TODO_SUCCESS = '[Todo] Finish Todo Success';
 
-  export const ADD_TODO = '[App] Add Todo';
+  export const ADD_TODO = '[Todo] Add Todo';
+  export const ADD_TODO_SUCCESS = '[Todo] Add Todo Success';
 
   export class LoadTodos {
     type = LOAD_TODOS;
@@ -37,15 +38,22 @@ export namespace TodoActions {
     constructor(public payload: Todo) { }
   }
 
-  // export class AddTodo implements Action {
-  //   type = ADD_TODO;
-  //   constructor(public payload: Todo) { }
-  // }
+  export class AddTodo implements Action {
+    type = ADD_TODO;
+    constructor(public payload: Todo) { }
+  }
+
+  export class AddTodoSuccess implements Action {
+    type = ADD_TODO_SUCCESS;
+    constructor(public payload: Todo) { }
+  }
 
   export type Actions =
     | LoadTodos
     | LoadTodosSuccess
     | LoadTodosFail
     | FinishTodo
-    | FinishTodoSuccess;
+    | FinishTodoSuccess
+    | AddTodo
+    | AddTodoSuccess;
 }

@@ -4,9 +4,16 @@
 </ng-template>
 
 <ng-template #content>
-  <h2>My Todos</h2>
+  <header class="header">
+    <h2>My Todos</h2>
+    <label>
+      Show done todos:
+      <input type="checkbox" (change)="showDoneTodos($event)">
+    </label>
+  </header>
+
   <ul class="list">
-    <li *ngFor="let todo of todos$ | async" class="item"
+    <li *ngFor="let todo of todos$ | async; trackBy: trackByFn" class="item"
       [class.-done]="todo.done">
       <div class="info">
         <span class="title">{{ todo.title }}</span>
@@ -15,9 +22,15 @@
       <div class="actions">
         <button
           *ngIf="!todo.done"
-          class="btn"
+          mat-button
+          color="primary"
           (click)="setTodoAsDone(todo.id)">Done</button>
       </div>
     </li>
   </ul>
+
 </ng-template>
+
+<button mat-fab color="primary" (click)="showAddTodoDialog()">
+  <i class="material-icons">add</i>
+</button>

@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add a new Todo</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-group">
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="What to do next?" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Pick a finish date"
+        formControlName="finishDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+
+  <pre>{{ form.value | json }}</pre>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    mat-raised-button
+    type="button"
+    color="primary"
+    (click)="addTodo()">ADD</button>
+</mat-dialog-actions>

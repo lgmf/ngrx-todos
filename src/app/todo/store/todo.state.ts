@@ -32,6 +32,13 @@ export function TodoReducer(state = initialState, action: TodoActions.Actions) {
       };
     }
 
+    case TodoActions.LOAD_TODOS_FAIL: {
+      return {
+        ...state,
+        loading: false
+      };
+    }
+
     case TodoActions.FINISH_TODO_SUCCESS: {
       const { payload } = action as TodoActions.FinishTodoSuccess;
       const updated = payload;
@@ -45,10 +52,16 @@ export function TodoReducer(state = initialState, action: TodoActions.Actions) {
       };
     }
 
-    case TodoActions.LOAD_TODOS_FAIL: {
+    case TodoActions.ADD_TODO_SUCCESS: {
+      const { payload } = action as TodoActions.AddTodoSuccess;
+      const todo = payload;
+
       return {
         ...state,
-        loading: false
+        todos: {
+          ...state.todos,
+          [todo.id]: todo
+        }
       };
     }
   }
