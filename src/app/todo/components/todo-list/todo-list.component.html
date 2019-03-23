@@ -25,6 +25,11 @@
           mat-button
           color="primary"
           (click)="setTodoAsDone(todo.id)">Done</button>
+        <button
+          *ngIf="todo.done"
+          mat-button
+          color="warn"
+          (click)="removeTodo(todo.id)">Remove</button>
       </div>
     </li>
   </ul>

@@ -22,4 +22,8 @@ export class TodoService {
   patch(id: number, todo: Partial<Todo>) {
     return this.http.patch<Todo>(`${this.baseUrl}/${id}`, todo);
   }
+
+  delete(id: number) {
+    return this.http.delete<Todo>(`${this.baseUrl}/${id}`);
+  }
 }

@@ -61,6 +61,10 @@ export class TodoListComponent implements OnDestroy {
     this.todos$ = show ? this.store.select(allTodos) : this.store.select(undoneTodos);
   }
 
+  removeTodo(id: number) {
+    this.store.dispatch(new TodoActions.RemoveTodo(id));
+  }
+
   private addTodo(todo: Todo) {
     this.store.select(nextId)
       .pipe(take(1))

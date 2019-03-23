@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { TodoService } from '../services/todo.service';
 import { TodoActions } from './todo.actions';
 
@@ -23,9 +23,7 @@ export class TodoEffects {
     ofType(TodoActions.ADD_TODO),
     switchMap((action: TodoActions.AddTodo) =>
       this.todoService.save(action.payload).pipe(
-        tap(console.log),
-        map(next => new TodoActions.AddTodoSuccess(next)),
-        // catchError(_ => of(null))
+        map(next => new TodoActions.AddTodoSuccess(next))
       )
     )
   );
@@ -36,6 +34,16 @@ export class TodoEffects {
     switchMap((action: TodoActions.FinishTodo) =>
       this.todoService.patch(action.payload, { done: true }).pipe(
         map(updated => new TodoActions.FinishTodoSuccess(updated))
+      )
+    )
+  );
+
+  @Effect()
+  deleteTodo$ = this.actions$.pipe(
+    ofType(TodoActions.REMOVE_TODO),
+    switchMap((action: TodoActions.RemoveTodo) =>
+      this.todoService.delete(action.payload).pipe(
+        map(_ => new TodoActions.RemoveTodoSuccess(action.payload))
       )
     )
   );

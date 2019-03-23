@@ -64,6 +64,15 @@ export function TodoReducer(state = initialState, action: TodoActions.Actions) {
         }
       };
     }
+
+    case TodoActions.REMOVE_TODO_SUCCESS: {
+      const { payload } = action as TodoActions.RemoveTodoSuccess;
+      const index = payload;
+      const todos = { ...state.todos };
+      delete todos[index];
+
+      return { ...state, todos };
+    }
   }
 
   return state;
