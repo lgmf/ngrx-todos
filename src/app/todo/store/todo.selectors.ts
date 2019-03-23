@@ -24,3 +24,7 @@ export const loading = createSelector(
   (state: TodoState) => state.loading
 );
 
+export const showDone = createSelector(
+  todoState,
+  (state: TodoState) => state.showDone
+);

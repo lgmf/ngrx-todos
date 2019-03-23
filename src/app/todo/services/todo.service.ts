@@ -26,4 +26,8 @@ export class TodoService {
   delete(id: number) {
     return this.http.delete<Todo>(`${this.baseUrl}/${id}`);
   }
+
+  persistShowDoneOption(show: boolean) {
+    localStorage.setItem('show-done', show.toString());
+  }
 }

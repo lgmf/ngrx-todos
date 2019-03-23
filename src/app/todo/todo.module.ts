@@ -8,18 +8,20 @@ import { StoreModule } from '@ngrx/store';
 import { AddTodoDialogComponent, TodoListComponent } from './components';
 import { TodoEffects } from './store/todo.effects';
 import { TodoReducer } from './store/todo.state';
+import { TodoPageComponent } from './todo-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TodoListComponent
+    component: TodoPageComponent
   }
 ];
 
 @NgModule({
   declarations: [
     TodoListComponent,
-    AddTodoDialogComponent
+    AddTodoDialogComponent,
+    TodoPageComponent
   ],
   imports: [
     CommonModule,

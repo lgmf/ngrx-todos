@@ -1,13 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { MatDialog, MatCheckboxChange } from '@angular/material';
-import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { filter, take, takeUntil } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '../../models/todo.model';
-import { TodoActions } from '../../store/todo.actions';
-import { allTodos, loading, nextId, undoneTodos } from '../../store/todo.selectors';
-import { TodoState } from '../../store/todo.state';
-import { AddTodoDialogComponent } from '../add-todo-dialog/add-todo-dialog.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,65 +7,22 @@ import { AddTodoDialogComponent } from '../add-todo-dialog/add-todo-dialog.compo
   styleUrls: ['./todo-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent implements OnDestroy {
+export class TodoListComponent {
 
-  todos$ = this.store.select(undoneTodos);
-  loading$ = this.store.select(loading);
-  destroyed$ = new Subject<void>();
+  @Input() todos: Todo[];
 
-  constructor(
-    private store: Store<{ todo: TodoState }>,
-    private dialog: MatDialog
-  ) {
-    this.store.dispatch(new TodoActions.LoadTodos());
-  }
-
-  ngOnDestroy() {
-    this.destroyed$.next();
-    this.destroyed$.complete();
-  }
+  @Output() finishTodo = new EventEmitter<number>();
+  @Output() removeTodo = new EventEmitter<number>();
 
   trackByFn(index: number, item: Todo) {
     return item.id;
   }
 
-  setTodoAsDone(id: number) {
-    this.store.dispatch(new TodoActions.FinishTodo(id));
+  finish(id: number) {
+    this.finishTodo.emit(id);
   }
 
-  showAddTodoDialog() {
-    const addTodoRef = this.dialog.open(AddTodoDialogComponent, {
-      width: '450px',
-      height: '450px'
-    });
-
-    addTodoRef.afterClosed()
-      .pipe(
-        filter(Boolean),
-        take(1),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe(todo => this.addTodo(todo));
-  }
-
-  showDoneTodos({ checked }: MatCheckboxChange) {
-    this.todos$ = checked ? this.store.select(allTodos) : this.store.select(undoneTodos);
-  }
-
-  removeTodo(id: number) {
-    this.store.dispatch(new TodoActions.RemoveTodo(id));
-  }
-
-  private addTodo(todo: Todo) {
-    this.store.select(nextId)
-      .pipe(take(1))
-      .subscribe(id => {
-        const newTodo: Todo = {
-          id,
-          ...todo
-        };
-
-        this.store.dispatch(new TodoActions.AddTodo(newTodo));
-      });
+  remove(id: number) {
+    this.removeTodo.emit(id);
   }
 }

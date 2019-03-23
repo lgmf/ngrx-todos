@@ -15,6 +15,8 @@ export namespace TodoActions {
   export const REMOVE_TODO = '[Todo] Remove Todo';
   export const REMOVE_TODO_SUCCESS = '[Todo] Remove Todo Success';
 
+  export const SHOW_DONE = '[Todo] Show Done';
+
   export class LoadTodos {
     type = LOAD_TODOS;
   }
@@ -61,6 +63,11 @@ export namespace TodoActions {
     constructor(public payload: number) { }
   }
 
+  export class ShowDone implements Action {
+    type = SHOW_DONE;
+    constructor(public payload: boolean) { }
+  }
+
   export type Actions =
     | LoadTodos
     | LoadTodosSuccess
@@ -68,5 +75,8 @@ export namespace TodoActions {
     | FinishTodo
     | FinishTodoSuccess
     | AddTodo
-    | AddTodoSuccess;
+    | AddTodoSuccess
+    | RemoveTodo
+    | RemoveTodoSuccess
+    | ShowDone;
 }

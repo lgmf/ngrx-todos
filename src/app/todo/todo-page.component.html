@@ -1,0 +1,26 @@
+<ng-container *ngIf="loading$ | async; then loading else content"></ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>
+
+<ng-template #content>
+  <header class="header">
+    <h2>My Todos</h2>
+    <label>
+      <mat-checkbox
+        [checked]="showDone$ | async"
+        (change)="showDoneTodos($event)"
+        color="primary">Show done</mat-checkbox>
+    </label>
+  </header>
+
+  <app-todo-list
+    [todos]="todos$ | async"
+    (finishTodo)="setTodoAsDone($event)"
+    (removeTodo)="removeTodo($event)"></app-todo-list>
+
+</ng-template>
+
+<button mat-fab color="primary" (click)="showAddTodoDialog()">
+  <i class="material-icons">add</i>
+</button>

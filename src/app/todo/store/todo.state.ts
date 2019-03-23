@@ -5,12 +5,14 @@ import { TodoActions } from './todo.actions';
 
 export interface TodoState {
   loading: boolean;
+  showDone: boolean;
   todos: EntityOf<Todo>;
 }
 
 const initialState: TodoState = {
   loading: false,
-  todos: {}
+  todos: {},
+  showDone: localStorage.getItem('show-done') === 'true'
 };
 
 export function TodoReducer(state = initialState, action: TodoActions.Actions) {
@@ -72,6 +74,13 @@ export function TodoReducer(state = initialState, action: TodoActions.Actions) {
       delete todos[index];
 
       return { ...state, todos };
+    }
+
+    case TodoActions.SHOW_DONE: {
+      const { payload } = action as TodoActions.ShowDone;
+      const show = payload;
+
+      return { ...state, showDone: show };
     }
   }
 
