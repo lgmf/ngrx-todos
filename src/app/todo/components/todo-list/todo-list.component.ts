@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatCheckboxChange } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
@@ -56,9 +56,12 @@ export class TodoListComponent implements OnDestroy {
       .subscribe(todo => this.addTodo(todo));
   }
 
-  showDoneTodos({ target }: any) {
-    const show = target.checked;
-    this.todos$ = show ? this.store.select(allTodos) : this.store.select(undoneTodos);
+  showDoneTodos({ checked }: MatCheckboxChange) {
+    this.todos$ = checked ? this.store.select(allTodos) : this.store.select(undoneTodos);
+  }
+
+  removeTodo(id: number) {
+    this.store.dispatch(new TodoActions.RemoveTodo(id));
   }
 
   private addTodo(todo: Todo) {

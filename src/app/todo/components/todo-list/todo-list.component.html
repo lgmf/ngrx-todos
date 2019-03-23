@@ -7,8 +7,10 @@
   <header class="header">
     <h2>My Todos</h2>
     <label>
-      Show done todos:
-      <input type="checkbox" (change)="showDoneTodos($event)">
+      <mat-checkbox
+        [checked]="false"
+        (change)="showDoneTodos($event)"
+        color="primary">Show done</mat-checkbox>
     </label>
   </header>
 
@@ -25,6 +27,11 @@
           mat-button
           color="primary"
           (click)="setTodoAsDone(todo.id)">Done</button>
+        <button
+          *ngIf="todo.done"
+          mat-button
+          color="warn"
+          (click)="removeTodo(todo.id)">Remove</button>
       </div>
     </li>
   </ul>
