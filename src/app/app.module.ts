@@ -8,11 +8,17 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'todos',
     loadChildren: './todo/todo.module#TodoModule'
+  },
+  {
+    path: '**',
+    redirectTo: '/todos',
+    pathMatch: 'full'
   }
 ];
 
@@ -21,7 +27,10 @@ const imports: any[] = [
   BrowserAnimationsModule,
   HttpClientModule,
   RouterModule.forRoot(routes),
-  StoreModule.forRoot({}),
+  StoreModule.forRoot({
+    router: routerReducer
+  }),
+  StoreRouterConnectingModule.forRoot(),
   EffectsModule.forRoot([])
 ];
 
@@ -35,11 +44,9 @@ if (!environment.production) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports,
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
