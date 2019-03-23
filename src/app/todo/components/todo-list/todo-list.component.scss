@@ -1,13 +1,4 @@
 :host {
-  display: grid;
-  grid-gap: 16px;
-
-  & > .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    border-bottom: 1px solid #e6e6e6;
-  }
 
   & > .list {
     display: grid;

@@ -1,43 +1,23 @@
-<ng-container *ngIf="loading$ | async; then loading else content"></ng-container>
-<ng-template #loading>
-  Loading...
-</ng-template>
-
-<ng-template #content>
-  <header class="header">
-    <h2>My Todos</h2>
-    <label>
-      <mat-checkbox
-        [checked]="false"
-        (change)="showDoneTodos($event)"
-        color="primary">Show done</mat-checkbox>
-    </label>
-  </header>
-
-  <ul class="list">
-    <li *ngFor="let todo of todos$ | async; trackBy: trackByFn" class="item"
-      [class.-done]="todo.done">
-      <div class="info">
-        <span class="title">{{ todo.title }}</span>
-        <span class="date">{{ todo.finishDate | date:'fullDate' }}</span>
-      </div>
-      <div class="actions">
-        <button
-          *ngIf="!todo.done"
-          mat-button
-          color="primary"
-          (click)="setTodoAsDone(todo.id)">Done</button>
-        <button
-          *ngIf="todo.done"
-          mat-button
-          color="warn"
-          (click)="removeTodo(todo.id)">Remove</button>
-      </div>
-    </li>
-  </ul>
-
-</ng-template>
-
-<button mat-fab color="primary" (click)="showAddTodoDialog()">
-  <i class="material-icons">add</i>
-</button>
+<ul class="list">
+  <li
+    *ngFor="let todo of todos; trackBy: trackByFn"
+    class="item"
+    [class.-done]="todo.done">
+    <div class="info">
+      <span class="title">{{ todo.title }}</span>
+      <span class="date">{{ todo.finishDate | date:'fullDate' }}</span>
+    </div>
+    <div class="actions">
+      <button
+        *ngIf="!todo.done"
+        mat-button
+        color="primary"
+        (click)="finish(todo.id)">Done</button>
+      <button
+        *ngIf="todo.done"
+        mat-button
+        color="warn"
+        (click)="remove(todo.id)">Remove</button>
+    </div>
+  </li>
+</ul>

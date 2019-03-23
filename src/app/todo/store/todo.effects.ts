@@ -48,6 +48,14 @@ export class TodoEffects {
     )
   );
 
+  @Effect({ dispatch: false })
+  showDone$ = this.actions$.pipe(
+    ofType(TodoActions.SHOW_DONE),
+    map((action: TodoActions.ShowDone) =>
+      this.todoService.persistShowDoneOption(action.payload)
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private todoService: TodoService
